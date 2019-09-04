@@ -5,7 +5,7 @@ Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
 
-    http://www.apache.org/licenses/LICENSE-2.0
+	http://www.apache.org/licenses/LICENSE-2.0
 
 Unless required by applicable law or agreed to in writing, software
 distributed under the License is distributed on an "AS IS" BASIS,
@@ -50,60 +50,66 @@ enum ykush3Action {
 };
 
 
-class Ykush3 : public UsbDevice  
+class Ykush3 : public UsbDevice
 {
-    	public:
+public:
 
-		Ykush3()
+	Ykush3()
 		: UsbDevice(0x04D8, 0xF11B)
-		{     
-		}
+	{
+	}
 
-		//Downstream ports and 5V EXT port control 
-		int get_port_status(char *serial, char port);     //get downstream port status
+	Ykush3(unsigned int pid)
+		: UsbDevice(0x04D8, pid)
+	{
+	}
 
-		int port_up(char *serial, char port);
+	//Downstream ports and 5V EXT port control 
+	int get_port_status(char *serial, char port);     //get downstream port status
 
-		int port_down(char *serial, char port);
+	int port_up(char *serial, char port);
 
-
-		//GPIO control
-		int write_io(char *serial, char port, char value);
-
-		int read_io(char *serial, char port);
-		
-		int gpio_ctrl_enable(char *serial);
-		
-		int gpio_ctrl_disable(char *serial);
-		
-		int enter_bootloader(char *serial);
+	int port_down(char *serial, char port);
 
 
-		//Configurations control
-		int config_port(char *serial, char port, char value);
+	//GPIO control
+	int write_io(char *serial, char port, char value);
 
-		//Reset
-		int reset(char *serial);
-		
-		//Help
-		void print_help(void);
+	int read_io(char *serial, char port);
 
-		//I2C
-		int i2c_enable_disable_control(bool enable_flag);		//ToDo
-		int i2c_enable_disable_gateway(bool enable_flag);		//ToDo
-		int i2c_set_address(char *i2c_address);			//ToDo
-		int i2c_write(char *i2c_address_ASCII, char *num_bytes_ASCII, char **data_to_write_ASCII);	//ToDo
-		int i2c_read(char *i2c_address_ASCII, char *num_bytes_ASCII, unsigned char *data_buffer, int *bytes_read);	//ToDo
+	int gpio_ctrl_enable(char *serial);
 
-		//Versioning
-		int display_version_bootloader(void);
-		int display_version_firmware(void);
+	int gpio_ctrl_disable(char *serial);
 
-		int set_usb_serial(char *serial);
-	
-	private:
+	int enter_bootloader(char *serial);
 
-		char *usb_serial;
+
+	//Configurations control
+	int config_port(char *serial, char port, char value);
+
+	//Reset
+	int reset(char *serial);
+
+	//Help
+	void print_help(void);
+
+	//I2C
+	int i2c_enable_disable_control(bool enable_flag);		//ToDo
+	int i2c_enable_disable_gateway(bool enable_flag);		//ToDo
+	int i2c_set_address(char *i2c_address);			//ToDo
+	int i2c_write(char *i2c_address_ASCII, char *num_bytes_ASCII, char **data_to_write_ASCII);	//ToDo
+	int i2c_read(char *i2c_address_ASCII, char *num_bytes_ASCII, unsigned char *data_buffer, int *bytes_read);	//ToDo
+
+	//Versioning
+	int display_version_bootloader(void);
+	int display_version_firmware(void);
+
+	int set_usb_serial(char *serial);
+
+private:
+
+	char *usb_serial;
+	bool is_legacy;
 };
 
 
@@ -117,7 +123,7 @@ class Ykush3 : public UsbDevice
 int ykush3_cmd_parser(int argc, char** argv);
 
 
-int ykush3_list_attached(void); 
+int ykush3_list_attached(void);
 
 
 

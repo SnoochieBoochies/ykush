@@ -28,7 +28,7 @@ limitations under the License.
  */
 
 #ifndef _LIBUSB_
-#define USB_CMD_NON_BLOCKING	1	//1 -> Set the USB device handle to be non-blocking
+#define USB_CMD_BLOCKING	0	//0 -> Set the USB device handle to be blocking
 #endif
 
 /**
