@@ -336,8 +336,8 @@ int ykush3_cmd_parser(int argc, char** argv)
 			return ykush3->port_down(NULL, port);
 		break;
 	case YKUSH3_LIST_BOARDS:
-		ykush3_list_attached();
-		break;
+		//list_attached is always a 0 return code...
+		return ykush3_list_attached();
 	case YKUSH3_GET_STATUS:
 		if (bySerialFlag) {
 			status_response = ykush3->get_port_status(argv[3], port);
